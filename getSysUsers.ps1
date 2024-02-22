@@ -105,7 +105,7 @@ process {
     #if ($FreeSystems) {
     #    # Email user with list of free systems
     #    $ScriptUserEmail = ([ADSI]"LDAP://<SID=$([Security.Principal.WindowsIdentity]::GetCurrent().User.Value)>").UserPrincipalName.ToString()
-    #    Send-MailMessage -To $ScriptUserEmail -From $ScriptUserEmail -Subject 'Free Testers' -Body $FreeSystems -SmtpServer 'owa.analog.com'
+    #    Send-MailMessage -To $ScriptUserEmail -From $ScriptUserEmail -Subject 'Free Testers' -Body $FreeSystems -SmtpServer 'owa.organisation.com'
     #}
 
     switch ($Host.Name) {
