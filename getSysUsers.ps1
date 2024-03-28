@@ -9,24 +9,23 @@
 # Optionally send an email with list of free systems.
 
 # author = Robert Drohan
-# copyright = Copyright 2024, Robert Drohan
-# license = GPLv3
-# version = 1.0
+# version = 1.1
 # status = Production
+
 
 param (
     # Define network names of systems to check.
-    [string[]]$SysNetNames = ("System1", "System2", "System3", "System4"),
+    [string[]]$SysNetNames = ("SYS1", "SYS2", "SYS3", "SYS4"),
 
     # Define alternate names where applicable.
     $SysTitle = @{
-        "System3" = "ABX56"
-        "System4" = "ABX78"              
+        "SYS1" = "XWINS1"
+        "SYS2" = "XWINS2"
     }
 )
 
 process {
-    # Define where to save the output. Writing to Linux ~/public_html ensures output will be accessible from a web browser.
+    # Define where to write the output. If writing to Linux ~/public_html, output will be accessible from a web browser.
     [string]$OutFile = '\\server\username\public_html\system_status.txt'
 
     $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -57,22 +56,28 @@ process {
 
         try {
             # Get details of user sessions on this system.
-            $SessionData = quser /server:$NetworkName
+            $SessionQuery = quser /server:$NetworkName
             # Find how many users are logged in. Allow for header on first line.
-            $LineCount = ($SessionData -split "`n").Count
+            $LineCount = ($SessionQuery -split "`n").Count
 
-            if ($LineCount -gt 1) {
-                # System is in use
-                $UserStatus = $SessionData  | Select-Object -index 1
-                $UserStatus = $UserStatus.Trim()
-                $SessionData = $UserStatus
-            }
             if ($LineCount -gt 2) {
                 # System has multiple users logged in.
                 $MultiUser = ("         *Multiple Logins*")
             }
 
-            if ([int]$Hour -eq 23) {                              
+            if ($LineCount -gt 1) {
+                # System is in use
+                for ($it = 1; $it -lt $Linecount; $it++) {
+
+                    $UserStatus = $SessionQuery  | Select-Object -index $it
+                    $UserStatus = $UserStatus.Trim()
+                    #$SessionData = $UserStatus
+				    $SessionData = -join ($SessionData, $UserStatus, "`n ")
+                }
+            }
+
+
+            if ([int]$Hour -eq 23 -or [int]$Hour -eq 7) {                              
                 # At specified time, find any users who are still logged in but disconnected & log them off.
                 $DisconUsers = $UserStatus | Select-String -Pattern 'Disc' -CaseSensitive -SimpleMatch
                 if ($DisconUsers) {
@@ -83,19 +88,19 @@ process {
             }
         }
         catch {
-            # Add any system where quser cannot find users to the list of free systems.
-            $SessionData = " No User"
+            # Add any system where quser finds no users to the list of free systems.
+            $SessionData = "No User`n"
             $FreeSystems = -join ($FreeSystems, $NetworkName, $PCTitle, "`n")
         }           
 
         if ([string]::IsNullOrEmpty($SessionData)) {
             # Add any system with no logins reported to the list of free systems.
-            $SessionData = " No User"
+            $SessionData = "No User`n"
             $FreeSystems = -join ($FreeSystems, $NetworkName, $PCTitle, "`n")
         }     
 
         $SysInfo = -join ($SysInfo, "`n", $NetworkName, $PCTitle, $MultiUser, "`n")
-        $SysInfo = -join ($SysInfo, " ", $SessionData, "`n")
+        $SysInfo = -join ($SysInfo, " ", $SessionData)
     }
 
     # Add an end-of -page delimiter and write output to file
