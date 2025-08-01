@@ -1,0 +1,16 @@
+SystemName,AltTitle,Type
+SYS-001,A,offline
+SYS-002,B,offline
+SYS-003,D,offline
+SYS-004,E,offline
+SYS-101,HPC1,online
+SYS-102,HPC2,online
+SYS-103,HPC3,online
+SYS-104,HPC4,online
+SYS-105,HPC5,online
+SYS-106,HPC6,online
+SYS-107,HPC7,online
+SYS-108,HPC8,online
+
+OutFile,H:\public_html\system_status.html,config
+
