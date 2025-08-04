@@ -21,22 +21,23 @@ Page contains timestamp, session data table, and basic styling.
 Report is stored locally (e.g., C:\inetpub\getSysUsers\session.html) or hosted for intranet access. 
 
 ## Design Specifications
-File Structure
-File: Purpose
-GetSystemUsers.ps1:	Main script
-session.html:	Generated HTML report
-TaskScheduler.xml: (optional)	Task import definition for automation
-README.md (optional):	Documentation and setup instructions
+File Structure\
+File: Purpose\
+GetSystemUsers.ps1:	Main script\
+session.html:	Generated HTML report\
+TaskScheduler.xml: (optional)	Task import definition for automation\
+README.md (optional):	Documentation and setup instructions\
 
-HTML Output Design
-Title: Reflects system state (“System Users Snapshot”)
-Table: Displays session data with headers:
-Username
-Session ID
-Status (Active/Disconnected)
-Logon Time
-Style: Basic HTML
+HTML Output Design\
+Title: Reflects system state (“System Users Snapshot”)\
+Table: Displays session data with headers:\
+Username\
+Session ID\
+Status (Active/Disconnected)\
+Logon Time\
+Style: Basic HTML\
 
-Resilience
+Resilience\
 Basic try/catch error handling in PowerShell to log failures
+
 
