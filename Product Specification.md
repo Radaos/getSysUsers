@@ -25,8 +25,8 @@ File Structure\
 File: Purpose\
 GetSystemUsers.ps1:	Main script\
 session.html:	Generated HTML report\
-TaskScheduler.xml: (optional)	Task import definition for automation\
-README.md (optional):	Documentation and setup instructions\
+TaskScheduler.xml: Task import definition for automation\
+README.md:	Documentation and setup instructions\
 
 HTML Output Design\
 Title: Reflects system state (“System Users Snapshot”)\
@@ -39,5 +39,6 @@ Style: Basic HTML\
 
 Resilience\
 Basic try/catch error handling in PowerShell to log failures
+
 
 
