@@ -6,7 +6,7 @@
 
 ## Functional Requirements
 1. Timed Execution
-Script runs every 5 minutes, configured via Windows Task Scheduler
+Script runs every 5 minutes, configured via Windows Task Scheduler.
 No GUI or interactive input; all logic is contained in the script
 
 2. Data Collection
@@ -16,9 +16,9 @@ Session ID, state, and type (console or RDP)
 Logon time and idle time
 
 3. HTML Report Output
-Script generates an HTML page each run, overwriting previous output
-Page contains timestamp, session data table, and basic styling
-Report is stored locally (e.g., C:\inetpub\getSysUsers\session.html) or hosted for intranet access
+Script generates an HTML page each run, overwriting previous output. 
+Page contains timestamp, session data table, and basic styling. 
+Report is stored locally (e.g., C:\inetpub\getSysUsers\session.html) or hosted for intranet access. 
 
 ## Design Specifications
 File Structure
@@ -39,3 +39,4 @@ Style: Basic HTML
 
 Resilience
 Basic try/catch error handling in PowerShell to log failures
+
