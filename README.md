@@ -4,4 +4,7 @@ This PowerShell script reads a set of system network names and alternate (more r
 It adds header information to the output, including the timestamp and the details of the script run.\
 For each system in the list, it retrieves the details of user sessions using the quser command.\
 If a system has multiple users logged in, it notes this in the output.\
-Generates a .txt report or a web page with system user details.
+Generates a .txt report or a web page with system user details.\
+
+Run runGetusers.bat manually, or\
+Create a new timed task in Windows Task Scheduler to run every 5 minutes.
