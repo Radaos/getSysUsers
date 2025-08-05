@@ -1,5 +1,6 @@
 # getSysUsers
-List who is logged into specified Windows machines.\
+Download files from Project.\
+Lists who is logged into specified Windows machines.\
 This PowerShell script reads a set of system network names and alternate (more readable) names from a .csv file.\
 It adds header information to the output, including the timestamp and the details of the script run.\
 For each system in the list, it retrieves the details of user sessions using the quser command.\
